@@ -11,12 +11,12 @@ driver.get("https://deepai.org/art")
 sleep(2)
 
 while True:
-    imgs = driver.find_elements_by_tag_name("img")
+    imgs = driver.find_elements(by=By.TAG_NAME , value="img")
     with open("imagelist.txt", "a") as file:
 
         for img in imgs:
             src = img.get_attribute("src")
-            if (not src.find("https://images.deepai.org/art-image/")):
+            if not src.find("https://images.deepai.org/art-image/") and src[-9:] != "thumb.jpg":
                 file.write(src+"\n")
 
         file.close()
